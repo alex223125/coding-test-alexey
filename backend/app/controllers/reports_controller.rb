@@ -8,11 +8,6 @@ class ReportsController < ApplicationController
     render json: @reports
   end
 
-  # GET /reports/1
-  def show
-    render json: @report
-  end
-
   # POST /reports
   def create
     @report = Report.new(report_params)
@@ -36,6 +31,7 @@ class ReportsController < ApplicationController
   # DELETE /reports/1
   def destroy
     @report.destroy
+    render json: {}, status: :no_content
   end
 
   private
