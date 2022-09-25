@@ -41,9 +41,6 @@
         </v-dialog>
 
         <v-dialog v-model="showDialog" max-width="500px">
-          <template v-slot:activator="{ on }">
-            <v-btn color="primary" dark class="mb-2" v-on="on">Show report</v-btn>
-          </template>
           <v-card>
             <v-card-title>
               <span class="headline">{{ "Show report" }}</span>
