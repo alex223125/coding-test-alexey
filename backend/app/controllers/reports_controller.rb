@@ -8,12 +8,16 @@ class ReportsController < ApplicationController
     render json: @reports
   end
 
+  def show
+    render json: { data: @report, status: :ok, message: 'Success' }
+  end
+
   # POST /reports
   def create
     @report = Report.new(report_params)
 
     if @report.save
-      render json: @report, status: :created, location: @report
+      render json: { status: :ok, message: 'Success' }
     else
       render json: @report.errors, status: :unprocessable_entity
     end
@@ -22,7 +26,7 @@ class ReportsController < ApplicationController
   # PATCH/PUT /reports/1
   def update
     if @report.update(report_params)
-      render json: @report
+      render json: { status: :ok, message: 'Success' }
     else
       render json: @report.errors, status: :unprocessable_entity
     end
@@ -30,9 +34,13 @@ class ReportsController < ApplicationController
 
   # DELETE /reports/1
   def destroy
-    @report.destroy
-    render json: {}, status: :no_content
+    if @report.destroy
+      render json: { json: 'Report was successfully deleted.'}
+    else
+      render json: @report.errors, status: :unprocessable_entity
+    end
   end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
