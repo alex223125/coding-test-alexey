@@ -1,21 +1,31 @@
 <template>
   <div id="app">
-    <!-- component matched by the route will render here -->
-    <router-view></router-view>
+    <v-app>
+      <p>{{ message }}</p>
+      <report/>
+    </v-app>
   </div>
 </template>
 
 <script>
+
+import report from "./components/report.vue";
+
 export default {
-  name: 'App',
-}
+  data: function() {
+    return {
+      message: "Hello Vue!"
+    };
+  },
+  components: {
+    report: report
+  }
+};
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
+<style scoped>
+p {
+  font-size: 2em;
+  text-align: center;
 }
 </style>

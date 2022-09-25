@@ -1,31 +1,16 @@
-import Vue from "vue"
-import VueRouter from "vue-router"
-import BootstrapVue from "bootstrap-vue"
-import App from "./App.vue"
-import Dashboard from "./components/Dashboard.vue"
+import Vue from 'vue'
+import Vuetify from 'vuetify'
+import 'vuetify/dist/vuetify.min.css'
+import App from './App.vue'
 
-import "bootstrap/dist/css/bootstrap.css"
-import "bootstrap-vue/dist/bootstrap-vue.css"
+Vue.use(Vuetify)
 
-Vue.config.productionTip = false
+document.addEventListener('DOMContentLoaded', () => {
+  const app = new Vue({
+    vuetify: new Vuetify(),
+    render: h => h(App)
+  }).$mount()
+  document.body.appendChild(app.$el)
 
-Vue.use(BootstrapVue)
-Vue.use(VueRouter)
-
-const routes = [
-  {
-    path: "/",
-    name: "dashboard",
-    component: Dashboard,
-  },
-]
-
-const router = new VueRouter({
-  routes: routes,
-  mode: "history",
+  console.log(app)
 })
-
-new Vue({
-  router: router,
-  render: (h) => h(App),
-}).$mount("#app")
