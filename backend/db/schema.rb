@@ -10,6 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2022_09_25_171844) do
+
+  create_table "reports", force: :cascade do |t|
+    t.string "title"
+    t.text "link"
+    t.boolean "is_downloaded", default: false
+    t.boolean "is_processed", default: false
+    t.string "source"
+    t.string "version"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
 end
