@@ -7,10 +7,7 @@ class Finding < ApplicationRecord
   private
 
   def define_default_values
-    binding.pry
     return unless self.description.blank?
-
-    binding.pry
     self.description = self.schema['attributes'].keys.reduce({}) do |acc, field|
       acc[field] = self.schema['attributes'][field]['default']
       acc
