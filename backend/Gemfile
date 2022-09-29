@@ -27,7 +27,6 @@ gem 'rack-cors'
 
 gem 'tzinfo-data'
 
-gem "down", "~> 5.0"
 
 gem "active_model_serializers", require: true
 
