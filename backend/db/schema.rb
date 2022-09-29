@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_29_012218) do
+ActiveRecord::Schema.define(version: 2022_09_29_015844) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,7 +55,6 @@ ActiveRecord::Schema.define(version: 2022_09_29_012218) do
     t.string "title"
     t.text "link"
     t.boolean "is_downloaded", default: false
-    t.boolean "is_processed", default: false
     t.string "source"
     t.string "version"
     t.datetime "created_at", precision: 6, null: false

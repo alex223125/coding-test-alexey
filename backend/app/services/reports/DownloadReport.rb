@@ -72,6 +72,7 @@ module Services
 
       def mark_as_downloaded
         @report.is_downloaded = true
+        @report.is_url_valid = true
         @report.save!
       end
 

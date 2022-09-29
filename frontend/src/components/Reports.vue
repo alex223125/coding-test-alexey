@@ -103,7 +103,7 @@ export default {
       { text: "Source", value: "source" },
       { text: "Version", value: "version" },
       { text: "is_downloaded", value: "is_downloaded" },
-      { text: "is_processed", value: "is_processed" },
+      { text: "is_url_valid", value: "is_url_valid" },
       { text: "Actions", value: "action", sortable: false }
     ],
     reports: [],
