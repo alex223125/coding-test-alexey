@@ -9,7 +9,7 @@ class ReportsController < ApplicationController
   end
 
   def show
-    render json: { data: @report, status: :ok, message: 'Success' }
+    render json: @report, status: :ok, message: 'Success'
   end
 
   # POST /reports
