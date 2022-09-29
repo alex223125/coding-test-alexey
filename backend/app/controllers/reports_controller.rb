@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class ReportsController < ApplicationController
-  before_action :set_report, only: [:show, :update, :destroy]
+  before_action :set_report, only: %i[show update destroy]
 
   # GET /reports
   def index
@@ -35,21 +37,21 @@ class ReportsController < ApplicationController
   # DELETE /reports/1
   def destroy
     if @report.destroy
-      render json: { json: 'Report was successfully deleted.'}
+      render json: { json: 'Report was successfully deleted.' }
     else
       render json: @report.errors, status: :unprocessable_entity
     end
   end
 
-
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_report
-      @report = Report.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def report_params
-      params.require(:report).permit(:title, :link, :source, :version)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_report
+    @report = Report.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def report_params
+    params.require(:report).permit(:title, :link, :source, :version)
+  end
 end

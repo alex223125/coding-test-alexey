@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Finding < ApplicationRecord
   store_accessor :schema, :required, :attributes
   serialize :description
@@ -9,19 +11,16 @@ class Finding < ApplicationRecord
   private
 
   def define_default_values
-    return unless self.description.blank?
-    self.description = self.schema['attributes'].keys.reduce({}) do |acc, field|
-      acc[field] = self.schema['attributes'][field]['default']
-      acc
+    return if description.present?
+
+    self.description = schema['attributes'].keys.index_with do |field|
+      schema['attributes'][field]['default']
     end
   end
 
   def validate_from_schema
-    self.schema['required'].each do |field|
-      errors.add(field, 'is required') if self.description[field].blank?
+    schema['required'].each do |field|
+      errors.add(field, 'is required') if description[field].blank?
     end
   end
-
 end
-
-

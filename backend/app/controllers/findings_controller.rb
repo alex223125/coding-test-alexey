@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class FindingsController < ApplicationController
   before_action :set_finding, only: [:show]
 
@@ -13,8 +15,9 @@ class FindingsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_finding
-      @finding = Finding.find(params[:id])
-    end
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_finding
+    @finding = Finding.find(params[:id])
+  end
 end

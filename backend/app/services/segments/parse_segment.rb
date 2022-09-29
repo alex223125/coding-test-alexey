@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 module Services
   module Segments
     class ParseSegment
-
       def initialize(segment)
         @segment = segment
       end
@@ -11,8 +12,8 @@ module Services
           parser.parse(@segment.content)
           mark_as_parsed
         end
-      rescue ActiveRecord::RecordInvalid => exception
-        message = exception.message
+      rescue ActiveRecord::RecordInvalid => e
+        message = e.message
         Rails.logger.error(message)
         mark_as_invalid(message)
       end
@@ -24,9 +25,7 @@ module Services
       end
 
       def item_parser
-        if @segment.category == "NessusReportItem"
-          Services::Reports::NessusReportItemParser.new(@segment)
-        end
+        Services::Reports::NessusReportItemParser.new(@segment) if @segment.category == 'NessusReportItem'
       end
 
       def mark_as_parsed
@@ -34,8 +33,8 @@ module Services
         @segment.save!
       end
 
-      def mark_as_invalid(e)
-        @segment.error_reason = e
+      def mark_as_invalid(message)
+        @segment.error_reason = message
         @segment.is_parsed = false
         @segment.save
       end

@@ -1,10 +1,11 @@
+# frozen_string_literal: true
+
 require 'net/http'
 
 module Services
   module Reports
     class DownloadReport
-
-      REPORT_ITEM_CATEGORY = "NessusReportItem"
+      REPORT_ITEM_CATEGORY = 'NessusReportItem'
 
       def initialize(report)
         @report = report
@@ -18,8 +19,8 @@ module Services
           close_threads
           mark_as_downloaded
         end
-      rescue ActiveRecord::RecordInvalid => exception
-        message = exception.message
+      rescue ActiveRecord::RecordInvalid => e
+        message = e.message
         Rails.logger.error(message)
         mark_as_invalid(message)
       end
@@ -51,9 +52,8 @@ module Services
         reader = Nokogiri::XML::Reader(@rd)
         reader.each do |node|
           next if node.node_type != Nokogiri::XML::Reader::TYPE_ELEMENT
-          if node.name == "ReportItem"
-            create_segment(node)
-          end
+
+          create_segment(node) if node.name == 'ReportItem'
         end
         @rd.close
       end
@@ -76,8 +76,8 @@ module Services
         @report.save!
       end
 
-      def mark_as_invalid(e)
-        @report.error_reason = e
+      def mark_as_invalid(message)
+        @report.error_reason = message
         @report.is_url_valid = false
         @report.save
       end

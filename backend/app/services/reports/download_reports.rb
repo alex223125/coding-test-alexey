@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 module Services
   module Reports
     class DownloadReports
-
       def call
         process
       end

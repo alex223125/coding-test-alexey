@@ -1,11 +1,12 @@
+# frozen_string_literal: true
+
 module Services
   module Segments
     class ParseSegments
-
       # for more different types of
       # items we can do it using parameters
       # for our purposes we have only one category
-      CATEGORY = "NessusReportItem"
+      CATEGORY = 'NessusReportItem'
       BATCH_SIZE = 500
 
       def initialize
@@ -25,7 +26,7 @@ module Services
 
       def parse
         segments.each do |segment|
-           Services::Segments::ParseSegment.new(segment).call
+          Services::Segments::ParseSegment.new(segment).call
         end
       end
     end
