@@ -1,15 +1,15 @@
 import Vue from 'vue'
-import Vuetify from 'vuetify'
-import 'vuetify/dist/vuetify.min.css'
-import App from './App.vue'
-
-Vue.use(Vuetify)
+import App from './App'
+import router from './router'
+import vuetify from '@/plugins/vuetify'
+import 'mdb-vue-ui-kit/css/mdb.min.css';
 
 document.addEventListener('DOMContentLoaded', () => {
   const app = new Vue({
-    vuetify: new Vuetify(),
+    vuetify,
+    router,
     render: h => h(App)
-  }).$mount()
+  }).$mount('#app')
   document.body.appendChild(app.$el)
 
   console.log(app)

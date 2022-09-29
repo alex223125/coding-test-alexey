@@ -1,26 +1,21 @@
 <template>
-  <div id="app">
-    <v-app>
-      <p>{{ message }}</p>
-      <report/>
-    </v-app>
-  </div>
+  <v-app>
+    <Header />
+    <div style="margin-top: 35px">
+      <router-view/>
+    </div>
+  </v-app>
 </template>
 
 <script>
-
-import report from "./components/report.vue";
+import Header from '@/components/Header.vue'
 
 export default {
-  data: function() {
-    return {
-      message: "Hello Vue!"
-    };
-  },
+  name: 'App',
   components: {
-    report: report
+    Header
   }
-};
+}
 </script>
 
 <style scoped>
