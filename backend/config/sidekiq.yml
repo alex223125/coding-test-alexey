@@ -1,0 +1,15 @@
+---
+:verbose: false
+:concurrency: 5
+:pidfile: .tmp/pids/workers.pid
+:logfile: .log/workers.log
+:queues:
+  - default
+
+:schedule:
+  download_reports_worker:
+    cron: '0 * * * * *'   # Runs once per minute (for production build it will be too much)
+    class: DownloadReportsWorkerJob
+  parse_segments_worker:
+    cron: '0 * * * * *'
+    class: ParseSegmentsWorkerJob
