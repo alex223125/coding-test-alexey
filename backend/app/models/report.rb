@@ -1,5 +1,6 @@
 class Report < ApplicationRecord
 
-  has_one_attached :file
+  has_many :segments
+  has_many :findings, through: :segments
 
 end
