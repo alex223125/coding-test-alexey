@@ -7,7 +7,14 @@ module Services
       end
 
       def call
-        parser.parse(@segment.content)
+        ActiveRecord::Base.transaction do
+          parser.parse(@segment.content)
+          mark_as_parsed
+        end
+      rescue ActiveRecord::RecordInvalid => exception
+        message = exception.message
+        Rails.logger.error(message)
+        mark_as_invalid(message)
       end
 
       private
@@ -20,6 +27,17 @@ module Services
         if @segment.category == "NessusReportItem"
           Services::Reports::NessusReportItemParser.new(@segment)
         end
+      end
+
+      def mark_as_parsed
+        @segment.is_parsed = true
+        @segment.save!
+      end
+
+      def mark_as_invalid(e)
+        @segment.error_reason = e
+        @segment.is_parsed = false
+        @segment.save
       end
     end
   end

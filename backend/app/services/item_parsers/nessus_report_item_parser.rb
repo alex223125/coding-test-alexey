@@ -16,7 +16,6 @@ module Services
 
         case name
         when 'ReportItem'
-          # binding.pry
           @finding.tap do |u|
             u.description["port"] = attrs['port']
             u.description["svc_name"] = attrs['svc_name']
@@ -31,7 +30,6 @@ module Services
       end
 
       def characters(string)
-        # binding.pry
         if @current_element[:name] == "description"
           @finding.description["data"] = string
         elsif @current_element[:name] == "fname"
@@ -60,7 +58,7 @@ module Services
       end
 
       def end_document
-        @finding.save
+        @finding.save!
       end
     end
   end
