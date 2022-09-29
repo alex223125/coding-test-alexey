@@ -1,3 +1,5 @@
+require 'net/http'
+
 module Services
   module Reports
     class DownloadReport
