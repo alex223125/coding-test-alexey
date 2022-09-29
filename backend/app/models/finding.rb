@@ -2,6 +2,8 @@ class Finding < ApplicationRecord
   store_accessor :schema, :required, :attributes
   serialize :description
 
+  belongs_to :segment
+
   after_initialize :define_default_values
 
   private
