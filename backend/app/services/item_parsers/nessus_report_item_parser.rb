@@ -4,7 +4,6 @@ module Services
   module Reports
     class NessusReportItemParser < Nokogiri::XML::SAX::Document
       def initialize(segment)
-        super
         @segment = segment
         @finding = Finding.new
         @finding.segment = @segment
