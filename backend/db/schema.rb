@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_25_231042) do
+ActiveRecord::Schema.define(version: 2022_09_28_003349) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,10 +44,11 @@ ActiveRecord::Schema.define(version: 2022_09_25_231042) do
   end
 
   create_table "findings", force: :cascade do |t|
-    t.jsonb "schema", default: {"required"=>["plugin_name", "port", "severity", "plugin_id", "data"], "attributes"=>{"data"=>{"type"=>"text", "default"=>""}, "port"=>{"type"=>"string", "default"=>""}, "severity"=>{"type"=>"string", "default"=>""}, "plugin_id"=>{"type"=>"integer", "default"=>nil}, "plugin_name"=>{"type"=>"string", "default"=>""}}}, null: false
+    t.jsonb "schema", default: {"required"=>["port", "svc_name", "protocol", "severity", "plugin_id", "plugin_name", "plugin_family"], "attributes"=>{"port"=>{"type"=>"string", "default"=>""}, "protocol"=>{"type"=>"string", "default"=>""}, "severity"=>{"type"=>"string", "default"=>""}, "svc_name"=>{"type"=>"string", "default"=>""}, "plugin_id"=>{"type"=>"string", "default"=>""}, "plugin_name"=>{"type"=>"string", "default"=>""}, "plugin_family"=>{"type"=>"string", "default"=>""}}}, null: false
     t.jsonb "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "segment_id"
   end
 
   create_table "reports", force: :cascade do |t|
@@ -61,6 +62,15 @@ ActiveRecord::Schema.define(version: 2022_09_25_231042) do
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "is_url_valid"
     t.text "error_reason"
+  end
+
+  create_table "segments", force: :cascade do |t|
+    t.text "content"
+    t.text "category"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "report_id"
+    t.boolean "is_parsed", default: false
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
